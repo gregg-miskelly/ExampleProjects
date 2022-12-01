@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) Microsoft. All rights reserved.
+Licensed under the MIT license. See LICENSE file in the project root for full license information.
+-->
+
+<!--
+This file is used to describe the EvaluationMonitor component. This file is run through 
+vsdconfigtool.exe as part of the build, which generates EvaluationMonitor.vsdconfig. EvaluationMonitor.vsdconfig 
+is a binary version of this file which is deployed along with EvaluationMonitor.dll. EvaluationMonitor.vsdconfig 
+is then read by he component loading system at runtime.
+
+For more information about this file, see https://github.com/Microsoft/ConcordExtensibilitySamples/wiki/Component-discovery-and-configuration
+-->
+
+<Configuration xmlns="http://schemas.microsoft.com/vstudio/vsdconfig/2008">
+
+  <ManagedComponent
+    ComponentId="B133CBEA-8F79-472F-9AD5-071B6DB5A77A"
+    ComponentLevel="99000"
+    AssemblyName="EvaluationMonitor">
+    <!--NOTE: For more information on ComponentLevel, see https://github.com/Microsoft/ConcordExtensibilitySamples/wiki/Component-Levels-->
+
+    <Class Name="EvaluationMonitor.EntryPoint">
+
+      <Implements>
+        <InterfaceGroup>
+          <NoFilter/>
+          <Interface Name="IDkmFuncEvalStartingNotification"/>
+          <Interface Name="IDkmFuncEvalCompletedNotification"/>
+        </InterfaceGroup>
+      </Implements>
+    </Class>
+
+  </ManagedComponent>
+</Configuration>
