@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <!--This is version of the Concord API packages -->
+    <ConcordPackageVersion>17.0.2012801</ConcordPackageVersion>
+  </PropertyGroup>
+</Project>
