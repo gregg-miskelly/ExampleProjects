@@ -14,22 +14,7 @@ trim_trailing_whitespace = true
 # XML Formats
 
 [*.{xml,csproj,vcxproj,vcxproj.filters,nuspec,vsct,resx,config,targets,props,vsdconfigxml,xsd,natvis,playlist,vsixmanifest,runsettings}]
-indent_size = 4
-csharp_using_directive_placement = outside_namespace:silent
-csharp_prefer_simple_using_statement = true:suggestion
-csharp_prefer_braces = true:silent
-csharp_style_namespace_declarations = block_scoped:silent
-csharp_style_prefer_method_group_conversion = true:silent
-csharp_style_prefer_top_level_statements = true:silent
-csharp_style_expression_bodied_methods = false:silent
-csharp_style_expression_bodied_constructors = false:silent
-csharp_style_expression_bodied_operators = false:silent
-csharp_style_expression_bodied_properties = true:silent
-csharp_style_expression_bodied_indexers = true:silent
-csharp_style_expression_bodied_accessors = true:silent
-csharp_style_expression_bodied_lambdas = true:silent
-csharp_style_expression_bodied_local_functions = false:silent
-csharp_indent_labels = one_less_than_current
+indent_size = 2
 
 # JSON and YML
 [*.yml]
