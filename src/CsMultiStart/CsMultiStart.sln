@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34313.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiStartClient", "MultiStartClient\MultiStartClient.csproj", "{BC676F08-AAFD-4920-AFE8-42F02E2DC09B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiStartServer", "MultiStartServer\MultiStartServer.csproj", "{41C3280F-E672-404C-81E1-FD5A43D0788C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1EE9A9ED-D937-44EC-90F2-18F951A68CE3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC676F08-AAFD-4920-AFE8-42F02E2DC09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC676F08-AAFD-4920-AFE8-42F02E2DC09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC676F08-AAFD-4920-AFE8-42F02E2DC09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC676F08-AAFD-4920-AFE8-42F02E2DC09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41C3280F-E672-404C-81E1-FD5A43D0788C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41C3280F-E672-404C-81E1-FD5A43D0788C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41C3280F-E672-404C-81E1-FD5A43D0788C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41C3280F-E672-404C-81E1-FD5A43D0788C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1018AB7E-18E5-4D82-B2BB-F49F061A0D7F}
+	EndGlobalSection
+EndGlobal
