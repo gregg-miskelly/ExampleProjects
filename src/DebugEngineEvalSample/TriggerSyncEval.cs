@@ -3,6 +3,9 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using EnvDTE;
+using Microsoft.VisualStudio.Debugger;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
@@ -79,27 +82,51 @@ namespace DebugEngineEvalSample
             Instance = new TriggerSyncEval(package, commandService);
         }
 
-        /// <summary>
-        /// This function is the callback used to execute the command when the menu item is clicked.
-        /// See the constructor to see how the menu item is associated with this function using
-        /// OleMenuCommandService service and MenuCommand class.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        private void Execute(object sender, EventArgs e)
+        private void Execute(object sender, EventArgs _)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "TriggerSyncEval";
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            const string title = "TriggerSyncEval";
+
+            DTE dte = VSUtilities.GetRequiredService<DTE>();
+
+            try
+            {
+                using (EvaluationHelper evaluator = new EvaluationHelper(dte))
+                {
+                    string result = evaluator.EvaluateSync("myTestExpression");
+
+                    // Show a message box to prove we were here
+                    VsShellUtilities.ShowMessageBox(
+                        this.package,
+                        $"Evaluating 'myTestExpression' succeeded. Result: {result}",
+                        title,
+                        OLEMSGICON.OLEMSGICON_INFO,
+                        OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                        OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                }
+            }
+            catch (Exception e)
+            {
+                string message;
+                if (e is DkmException dkmException)
+                {
+                    message = string.Format("Failure code 0x{0:X}", dkmException.HResult);
+                }
+                else
+                {
+                    message = e.Message;
+                }
+
+                // Show a message box to prove we were here
+                VsShellUtilities.ShowMessageBox(
+                    this.package,
+                    $"Evaluating 'myTestExpression' failed. {e.Message}",
+                    title,
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            }
         }
     }
 }
