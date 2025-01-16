@@ -1,0 +1,28 @@
+{
+    "configurations": [
+    {
+        "name": "Launch VsCodeVCXProj.exe [x64]",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "preLaunchTask": "build.x64",
+        "program": "${workspaceFolder}/x64/Debug/VsCodeVCXProj.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "console": "externalTerminal"
+    },
+    {
+        "name": "Launch VsCodeVCXProj.exe [x86]",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "preLaunchTask": "build.x86",
+        "program": "${workspaceFolder}/Debug/VsCodeVCXProj.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "console": "externalTerminal"
+    }
+    ]
+}
