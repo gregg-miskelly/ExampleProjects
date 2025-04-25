@@ -227,13 +227,35 @@ set_clang_path_and_version()
     if [[ $__ClangMajorVersion == 0 && $__ClangMinorVersion == 0 ]]; then
         # If the version is not specified, search for one
 
+        # Find the newest version of clang on the PATH
         local ClangVersion=""
-        for ver in "3.6" "3.9" "4.0" "5.0" "9" "10"; do
-            hash "clang-$ver" 2>/dev/null
-            if [ $? == 0 ]; then
-               ClangVersion=$ver
-            fi
+        local ClangMaxMajorVersion=0
+        local ClangMaxMinorVersion=0
+        local oldIFS="$IFS"
+        IFS=":"
+        for dir in $PATH; do
+            for i in "$dir"/clang-*; do
+                local clangCommand
+                clangCommand="$(basename "$i")"
+                local candidateClangVersion="${clangCommand:6}"
+                if [[ "$candidateClangVersion" =~ ^[0-9]+$ ]]; then
+                    if (( candidateClangVersion >= ClangMaxMajorVersion )); then
+                        ClangVersion=$candidateClangVersion
+                        ClangMaxMajorVersion=$candidateClangVersion
+                        ClangMaxMinorVersion=0
+                    fi
+                elif [[ "$candidateClangVersion" =~ ^[0-9]+\.[0-9]+$ ]]; then
+                    local candidateClangMajorVersion="${candidateClangVersion%.*}"
+                    local candidateClangMinorVersion="${candidateClangVersion#*.}"
+                    if (( candidateClangMajorVersion > ClangMaxMajorVersion )) || (( candidateClangMajorVersion == ClangMaxMajorVersion && candidateClangMinorVersion > ClangMaxMinorVersion )); then
+                        ClangVersion=$candidateClangVersion
+                        ClangMaxMajorVersion=$candidateClangMajorVersion
+                        ClangMaxMinorVersion=$candidateClangMinorVersion
+                    fi
+                fi
+            done
         done
+        IFS="$oldIFS"
 
         if [ -z "$ClangVersion" ]; then
             # If the 'clang-<ver>' commands weren't installed, scrape version info from the 'clang' command
